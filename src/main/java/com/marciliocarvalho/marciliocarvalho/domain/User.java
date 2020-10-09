@@ -1,15 +1,13 @@
 package com.marciliocarvalho.marciliocarvalho.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
 
