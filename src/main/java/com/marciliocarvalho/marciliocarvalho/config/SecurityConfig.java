@@ -14,7 +14,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/api/signin",
-            "/api/users"
+            "/api/users",
+            "/h2-console/**"
     };
 
     @Override
@@ -22,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and().headers().frameOptions().sameOrigin();
     }
 
 }
