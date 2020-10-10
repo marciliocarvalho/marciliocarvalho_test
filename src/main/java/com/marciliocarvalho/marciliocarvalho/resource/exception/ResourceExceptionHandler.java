@@ -1,5 +1,6 @@
 package com.marciliocarvalho.marciliocarvalho.resource.exception;
 
+import com.marciliocarvalho.marciliocarvalho.service.exception.LoginException;
 import com.marciliocarvalho.marciliocarvalho.service.exception.UniqueFieldException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(UniqueFieldException.class)
-    public ResponseEntity<StandardError> objectNotFound(UniqueFieldException e, HttpServletRequest request) {
+    public ResponseEntity<StandardError> uniqueFieldException(UniqueFieldException e, HttpServletRequest request) {
         StandardError err = new StandardError(e.getMessage(), HttpStatus.CONFLICT.value());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
+    }
+
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity<StandardError> loginException(UniqueFieldException e, HttpServletRequest request) {
+        StandardError err = new StandardError(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 }

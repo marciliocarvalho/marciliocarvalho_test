@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/")
@@ -47,5 +48,11 @@ public class UserResource {
         obj.setId(id);
         obj = userService.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("signin")
+    public ResponseEntity<Map<Object, Object>> login(@RequestBody User obj) {
+        Map<Object, Object> retorno = userService.autenticate(obj.getLogin(), obj.getPassword());
+        return ResponseEntity.ok().body(retorno);
     }
 }

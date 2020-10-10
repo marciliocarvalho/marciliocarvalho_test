@@ -2,17 +2,23 @@ package com.marciliocarvalho.marciliocarvalho.service;
 
 import com.marciliocarvalho.marciliocarvalho.domain.User;
 import com.marciliocarvalho.marciliocarvalho.repository.UserRepository;
+import com.marciliocarvalho.marciliocarvalho.security.JWTUtil;
+import com.marciliocarvalho.marciliocarvalho.service.exception.LoginException;
 import com.marciliocarvalho.marciliocarvalho.service.exception.UniqueFieldException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    JWTUtil jwtUtil;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -48,5 +54,20 @@ public class UserService {
         }
 
         return userRepository.save(newObj);
+    }
+
+    public Map<Object, Object> autenticate(String login, String password) {
+        User user = userRepository.findByLogin(login);
+        if (user == null || !user.getPassword().equals(password)) {
+            throw new LoginException("Invalid login or password");
+        }
+
+        String token = jwtUtil.generateToken(login, user);
+
+        Map<Object, Object> response = new HashMap<>();
+
+        response.put("token", token);
+
+        return response;
     }
 }
