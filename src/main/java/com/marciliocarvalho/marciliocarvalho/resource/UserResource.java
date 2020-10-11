@@ -52,7 +52,13 @@ public class UserResource {
 
     @PostMapping("signin")
     public ResponseEntity<Map<Object, Object>> login(@RequestBody User obj) {
-        Map<Object, Object> retorno = userService.autenticate(obj.getLogin(), obj.getPassword());
-        return ResponseEntity.ok().body(retorno);
+        Map<Object, Object> response = userService.autenticate(obj.getLogin(), obj.getPassword());
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("me")
+    public ResponseEntity<Map<Object, Object>> findMe() {
+        Map<Object, Object> response = userService.findMe();
+        return ResponseEntity.ok().body(response);
     }
 }

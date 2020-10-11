@@ -33,7 +33,13 @@ public class JWTUtil {
         return Jwts.builder()
                 .setSubject(login)
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .claim("user", user)
+                .claim("id", user.getId())
+                .claim("firstName", user.getFirstName())
+                .claim("lastName", user.getLastName())
+                .claim("email", user.getEmail())
+                .claim("birthday", user.getBirthday())
+                .claim("login", user.getLogin())
+                .claim("phone", user.getPhone())
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
     }
@@ -53,7 +59,7 @@ public class JWTUtil {
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    private Claims getClaims(String token) {
+    public Claims getClaims(String token) {
         try {
             return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
         } catch (Exception e) {
@@ -64,7 +70,15 @@ public class JWTUtil {
     private Integer getUserId(String token) {
         Claims claims = getClaims(token);
         if (claims != null) {
-            return Integer.parseInt(claims.get("user", LinkedHashMap.class).get("id").toString());
+            return Integer.parseInt(claims.get("id").toString());
+        }
+        return null;
+    }
+
+    public String getClaim(String token, String claim) {
+        Claims claims = getClaims(token);
+        if (claims != null) {
+            return claims.get(claim).toString();
         }
         return null;
     }
@@ -81,5 +95,4 @@ public class JWTUtil {
         }
         return false;
     }
-
 }

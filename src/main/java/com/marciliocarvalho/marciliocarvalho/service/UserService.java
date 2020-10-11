@@ -8,10 +8,9 @@ import com.marciliocarvalho.marciliocarvalho.service.exception.UniqueFieldExcept
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -19,6 +18,8 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     JWTUtil jwtUtil;
+    @Autowired
+    HttpServletRequest req;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -67,6 +68,26 @@ public class UserService {
         Map<Object, Object> response = new HashMap<>();
 
         response.put("token", token);
+
+        return response;
+    }
+
+    public Map<Object, Object> findMe() {
+
+        Map<Object, Object> response = new HashMap<>();
+        String token = jwtUtil.resolveToken(req);
+        response.put("id", Integer.parseInt(jwtUtil.getClaim(token, "id")));
+        response.put("firstName", jwtUtil.getClaim(token, "firstName"));
+        response.put("lastName", jwtUtil.getClaim(token, "lastName"));
+        response.put("email", jwtUtil.getClaim(token, "email"));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String miliseconds = jwtUtil.getClaim(token, "birthday");
+        Date birthday = new Date(Long.parseLong(miliseconds));
+
+        response.put("birthday", birthday);
+        response.put("login", jwtUtil.getClaim(token, "login"));
+        response.put("phone", jwtUtil.getClaim(token, "phone"));
 
         return response;
     }
