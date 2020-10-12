@@ -6,7 +6,7 @@ if (environment.production) {
   api = '/api/';
 }
 else {
-  api = 'http://localhost:4200/api/';
+  api = 'http://localhost:8080/api/';
 }
 
 export class Endpoints {

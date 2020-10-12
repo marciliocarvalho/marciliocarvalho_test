@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
   declarations: [UserListComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
   ]
 })
 export class UserModule { }
