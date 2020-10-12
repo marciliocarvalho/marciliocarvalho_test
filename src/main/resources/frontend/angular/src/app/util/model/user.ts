@@ -1,13 +1,13 @@
 import { Car } from './car';
 
 export interface User {
-  id: number;
-  firstName?:string;
+  id?: number;
+  firstName?: string;
   lastName?: string;
-  emailw:string;
+  email?: string;
   birthday?: Date;
-  login?:string;
+  login?: string;
   password?: string;
-  phone?:string;
+  phone?: string;
   cars?: Car[];
 }

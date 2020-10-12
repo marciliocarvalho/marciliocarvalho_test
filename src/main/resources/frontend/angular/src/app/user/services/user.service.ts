@@ -15,4 +15,12 @@ export class UserService {
   findAll() {
     return this.http.get<User[]>(Endpoints.USER_FIND_ALL);
   }
+
+  delete(id: number) {
+    return this.http.delete<void>(Endpoints.USER_DELETE + id);
+  }
+
+  insert(user: User) {
+    return this.http.post<User>(Endpoints.USER_INSERT, user);
+  }
 }

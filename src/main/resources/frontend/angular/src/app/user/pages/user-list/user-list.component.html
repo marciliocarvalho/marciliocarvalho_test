@@ -1,1 +1,25 @@
-<p *ngFor="let user of users">{{user.firstName}}</p>
+<div class="jumbotron h1">Users</div>
+<div class="text-center mb-3" ><span style="cursor: pointer;" class="btn btn-link" routerLink="user-add">Add user</span></div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+      <th>Login</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.login}}</td>
+      <td><div [routerLink]="['user-edit']" style="cursor: pointer; color: green;">Edit</div></td>
+      <td><div (click)="delete(user.id)" style="cursor: pointer; color: red;">Delete</div></td>
+    </tr>
+
+  </tbody>
+</table>

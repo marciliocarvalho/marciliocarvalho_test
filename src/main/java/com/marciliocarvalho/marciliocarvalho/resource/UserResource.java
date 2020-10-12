@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,8 +52,8 @@ public class UserResource {
     }
 
     @PostMapping("signin")
-    public ResponseEntity<Map<Object, Object>> login(@RequestBody User obj) {
-        Map<Object, Object> response = userService.autenticate(obj.getLogin(), obj.getPassword());
+    public ResponseEntity<Map<Object, Object>> login(@RequestBody Map<String, String> credentials) {
+        Map<Object, Object> response = userService.autenticate(credentials.get("login"), credentials.get("password"));
         return ResponseEntity.ok().body(response);
     }
 

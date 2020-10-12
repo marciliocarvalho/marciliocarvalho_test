@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class AuthModule { }

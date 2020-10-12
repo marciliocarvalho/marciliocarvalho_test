@@ -21,7 +21,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(LoginException.class)
-    public ResponseEntity<StandardError> loginException(UniqueFieldException e, HttpServletRequest request) {
+    public ResponseEntity<StandardError> loginException(LoginException e, HttpServletRequest request) {
         StandardError err = new StandardError(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
