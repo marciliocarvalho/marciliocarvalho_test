@@ -92,7 +92,7 @@
                 <configuration>
                     <executable>ng</executable>
                     <workingDirectory>src/main/resources/frontend/angular</workingDirectory>
-                    <arguments>build</arguments>
+                    <arguments>build --prod</arguments>
                 </configuration>
             </plugin>
         </plugins>
