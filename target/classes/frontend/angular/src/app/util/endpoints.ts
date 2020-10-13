@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 
 let api;
 
-if (environment.production) {
+if (true) {
   api = '/api/';
 }
 else {

@@ -1047,16 +1047,12 @@ CarService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Endpoints", function() { return Endpoints; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../environments/environment */ "./src/environments/environment.ts");
-
 
 let api;
-if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].production) {
+if (true) {
     api = '/api/';
 }
-else {
-    api = 'http://localhost:8080/api/';
-}
+else {}
 class Endpoints {
 }
 Endpoints.USER_FIND_ALL = api + 'users/';

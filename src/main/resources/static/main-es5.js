@@ -1987,20 +1987,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! tslib */
     "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./../../environments/environment */
-    "./src/environments/environment.ts");
 
     var api;
 
-    if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].production) {
+    if (true) {
       api = '/api/';
-    } else {
-      api = 'http://localhost:8080/api/';
-    }
+    } else {}
 
     var Endpoints = function Endpoints() {
       _classCallCheck(this, Endpoints);
