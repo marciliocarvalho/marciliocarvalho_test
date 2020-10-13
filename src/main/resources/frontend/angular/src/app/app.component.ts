@@ -25,4 +25,12 @@ export class AppComponent {
   users() {
     this.router.navigate(['/user']);
   }
+
+  get isLogged() {
+    return this.authService.currentUserValue ? true : false;
+  }
+
+  get username() {
+    return this.authService.getUserName();
+  }
 }

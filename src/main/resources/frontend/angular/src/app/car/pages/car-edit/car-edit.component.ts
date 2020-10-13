@@ -43,7 +43,7 @@ export class CarEditComponent implements OnInit {
       alert('Car updated!');
       this.location.back();
     }, error => {
-      alert(error.error.message);
+      console.log(error);
     })
   }
 

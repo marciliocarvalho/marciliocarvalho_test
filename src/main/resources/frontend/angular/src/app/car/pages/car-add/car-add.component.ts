@@ -33,6 +33,7 @@ export class CarAddComponent implements OnInit {
     this.insert().subscribe(car => {
       this.router.navigate(['car']);
     }, error => {
+      console.log(error)
       alert(error.error.message);
     });
   }

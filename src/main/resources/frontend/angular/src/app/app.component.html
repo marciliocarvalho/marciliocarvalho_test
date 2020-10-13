@@ -1,6 +1,9 @@
 <div class="container">
-  <span style="cursor: pointer; color: blue" class="mr-5" (click)="logout()">Logout</span>
-  <span style="cursor: pointer; color: blue"  (click)="users()">Users</span>
+  <div class="d-flex justify-content-between h5 mt-3 mb-3">
+    <span *ngIf="!isLogged" style="cursor: pointer; color: blue" class="mr-5" routerLink="/auth">Login</span>
+    <span *ngIf="isLogged" style="cursor: pointer; color: blue" class="mr-5" (click)="logout()">Logout</span>
+    <span class="justify-content-end" *ngIf="isLogged"> {{username}} </span>
+  </div>
+
   <router-outlet></router-outlet>
 </div>
-
