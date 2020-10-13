@@ -1,0 +1,10 @@
+<div class="jumbotron h1">Add car</div>
+
+<div class="form-group">
+  <input [(ngModel)]="car.licensePlate" type="text" class="form-control mb-3" placeholder="License Plate">
+  <input [(ngModel)]="car.color" type="text" class="form-control mb-3" placeholder="Color">
+  <input [(ngModel)]="car.model" type="text" class="form-control mb-3" placeholder="Model">
+  <input [(ngModel)]="car.year" type="number" class="form-control mb-3" placeholder="Year">
+</div>
+
+<button (click)="onSubmit()" class="btn btn-success mb-4">Insert Car</button>

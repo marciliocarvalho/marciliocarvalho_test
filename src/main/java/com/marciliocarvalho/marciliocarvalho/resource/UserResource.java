@@ -1,17 +1,25 @@
 package com.marciliocarvalho.marciliocarvalho.resource;
 
 import com.marciliocarvalho.marciliocarvalho.domain.User;
+import com.marciliocarvalho.marciliocarvalho.dto.UserNewDTO;
+import com.marciliocarvalho.marciliocarvalho.resource.exception.StandardError;
 import com.marciliocarvalho.marciliocarvalho.service.UserService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController
 @RequestMapping(value = "/api/")
@@ -32,8 +40,10 @@ public class UserResource {
     }
 
     @PostMapping(value = "users")
-    public ResponseEntity<Void> insert(@RequestBody User obj) {
-        obj = userService.insert(obj);
+    public ResponseEntity<Object> insert(@Valid @RequestBody UserNewDTO objDto) {
+
+        User obj = userService.fromDto(objDto);
+        obj = userService.insert(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
@@ -52,7 +62,8 @@ public class UserResource {
     }
 
     @PostMapping("signin")
-    public ResponseEntity<Map<Object, Object>> login(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<Object> login(@RequestBody Map<String, String> credentials) {
+
         Map<Object, Object> response = userService.autenticate(credentials.get("login"), credentials.get("password"));
         return ResponseEntity.ok().body(response);
     }

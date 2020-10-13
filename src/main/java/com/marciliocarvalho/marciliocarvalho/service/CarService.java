@@ -30,6 +30,7 @@ public class CarService {
     }
 
     public Car insert(Car obj) {
+
         if (carRepository.findByLicensePlate(obj.getLicensePlate()) != null) {
             throw new UniqueFieldException("License plate already exists");
         }

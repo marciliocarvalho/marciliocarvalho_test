@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/util/model/user';
 import { UserService } from '../../services/user.service';
 
@@ -11,16 +12,18 @@ export class UserAddComponent implements OnInit {
 
   user: User = {
     birthday: null,
-    email: '',
-    firstName: '',
-    lastName: '',
-    login: '',
-    password: '',
-    phone: ''
+    email: null,
+    firstName: null,
+    lastName: null,
+    login: null,
+    password: null,
+    phone: null,
+    cars: null
   }
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +31,8 @@ export class UserAddComponent implements OnInit {
 
   onSubmit() {
     this.insert().subscribe(user => {
-      alert('Success!!!')
+      alert('Success!!!');
+      this.router.navigate(['']);
     }, error => {
       alert(error.error.message);
     })

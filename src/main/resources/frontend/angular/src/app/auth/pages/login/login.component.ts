@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
   signIn() {
     return this.authService.signIn(this.login, this.password).pipe(first()).subscribe(data => {
       this.authService.setUserName(this.login);
-      this.router.navigate(['car/car-list'])
+      this.router.navigate(['car'])
 
     }, error => {
-      console.log(error)
+      alert(error.error.message)
     })
   }
 }

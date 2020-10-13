@@ -1,6 +1,10 @@
 package com.marciliocarvalho.marciliocarvalho.domain;
 
+import com.marciliocarvalho.marciliocarvalho.dto.UserNewDTO;
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +41,16 @@ public class User implements Serializable {
         this.login = login;
         this.password = password;
         this.phone = phone;
+    }
+
+    public User(UserNewDTO obj) {
+        this.firstName = obj.getFirstName();
+        this.lastName = obj.getLastName();
+        this.email = obj.getEmail();
+        this.birthday = obj.getBirthday();
+        this.login = obj.getLogin();
+        this.password = obj.getPassword();
+        this.phone = obj.getPhone();
     }
 
     public Integer getId() {

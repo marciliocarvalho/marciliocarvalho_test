@@ -1,1 +1,31 @@
-<p>car-list works!</p>
+<div class="jumbotron h1">Cars</div>
+<span style="cursor: pointer;" class="btn btn-link" (click)="gotoAddCar()">Add car</span>
+  <span style="cursor: pointer;" class="btn btn-link" routerLink="/auth">Login</span>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>License Plate</th>
+      <th>Model</th>
+      <th>Color</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars">
+      <td>{{car.year}}</td>
+      <td>{{car.licensePlate}}</td>
+      <td>{{car.model}}</td>
+      <td>{{car.color}}</td>
+      <td>
+        <div [routerLink]="['/car/car-edit', car.id]" style="cursor: pointer; color: green;">Edit</div>
+      </td>
+      <td>
+        <div (click)="delete(car.id)" style="cursor: pointer; color: red;">Delete</div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

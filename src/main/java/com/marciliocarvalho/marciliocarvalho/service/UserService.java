@@ -1,14 +1,19 @@
 package com.marciliocarvalho.marciliocarvalho.service;
 
 import com.marciliocarvalho.marciliocarvalho.domain.User;
+import com.marciliocarvalho.marciliocarvalho.dto.UserNewDTO;
 import com.marciliocarvalho.marciliocarvalho.repository.UserRepository;
 import com.marciliocarvalho.marciliocarvalho.security.JWTUtil;
+import com.marciliocarvalho.marciliocarvalho.service.exception.BlankFieldsException;
+import com.marciliocarvalho.marciliocarvalho.service.exception.DependencyException;
 import com.marciliocarvalho.marciliocarvalho.service.exception.LoginException;
 import com.marciliocarvalho.marciliocarvalho.service.exception.UniqueFieldException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -30,17 +35,21 @@ public class UserService {
         return obj.get();
     }
 
-    public User insert(User obj) {
-        if (userRepository.findByEmail(obj.getEmail()) != null) {
+    public User insert(UserNewDTO objNewDto) {
+        if (userRepository.findByEmail(objNewDto.getEmail()) != null) {
             throw new UniqueFieldException("Email already exists");
-        } else if (userRepository.findByLogin(obj.getLogin()) != null) {
+        } else if (userRepository.findByLogin(objNewDto.getLogin()) != null) {
             throw new UniqueFieldException("Login already exists");
         }
-        return userRepository.save(obj);
+
+        return userRepository.save(fromDto(objNewDto));
     }
 
     public void delete(Integer id) {
-        findById(id);
+        User user = findById(id);
+        if (user.getCars().size() > 0) {
+            throw new DependencyException("This user has cars");
+        }
         userRepository.deleteById(id);
     }
 
@@ -91,4 +100,9 @@ public class UserService {
 
         return response;
     }
+
+    public User fromDto(UserNewDTO objDto) {
+        return new User(objDto);
+    }
+
 }

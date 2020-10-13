@@ -7,8 +7,6 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
-    // canActivate: [AuthGuardService]
-
   },
   {
     path: 'auth',
@@ -16,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'car',
-    loadChildren: () => import('./car/car.module').then(m => m.CarModule)
+    loadChildren: () => import('./car/car.module').then(m => m.CarModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: '',

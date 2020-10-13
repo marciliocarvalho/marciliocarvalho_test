@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class UserEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -32,8 +34,9 @@ export class UserEditComponent implements OnInit {
 
   onSubmit() {
     this.userService.edit(this.user).subscribe(x => {
-        console.log(x)
-    }, error=> {
+      alert('Success!');
+      this.router.navigate(['']);
+    }, error => {
       alert(error.error.message);
     })
   }
